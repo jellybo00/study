@@ -1,1 +1,1 @@
-# stud
+# study
