@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .alert-box {
+      display: none;
+      background: skyblue;
+      padding: 20px;
+      color: #fff;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+    }
+    #alert2 {background: tomato;}
+  </style>
+</head>
+<body>
+
+  <div class="cont_wrap" style="display: none;">
+    <div class="alert-box" id="alert" >
+      알림창임
+      <!-- 5분숙제 :: 알림창에 닫기 달아오기 -->
+      <button onclick="document.getElementById('alert').style.display='none'">
+        닫기
+      </button>
+    </div>
+
+    <button onclick="document.getElementById('alert').style.display='block'">
+      버튼
+    </button>
+  </div>
+
+  <!-- function으로 쓰는법 -->
+  <div class="cont_wrap" style="display: none;">
+    <div class="alert-box" id="alert2" >
+      알림창임
+      <button onclick="alertHide('none')">
+        닫기
+      </button>
+    </div>
+
+    <button onclick="alertShow('block')">
+      버튼
+    </button>
+  </div>
+
+  <!-- 버튼 1 클릭시 -> 아이디 입력해주세요
+      버튼 2 클릭시 -> 비밀번호 입력해주세요 -->
+  <div class="cont_wrap">
+    <div class="alert-box" id="alert3">
+      <p class="title1" id="title">알림창임</p>
+      <button id="close">닫기</button>
+    </div>
+
+    <button onclick="alertView('block', '아이디 입력해주세요')">버튼1</button>
+    <button onclick="alertView('block', '비밀번호 입력해주세요')">버튼2</button>
+  </div>
+
+
+
+
+
+  <script>
+    document.getElementById('close').addEventListener('click',function(){
+      alertView('none')
+    })
+
+    function alertView(alertShow, notiTtl) {
+      // 아이디로 찾을때
+      // document.getElementById('title').innerHTML = notiTtl;
+
+      // 클래스로 찾을때는 뒤에[idx]를 명시해줘야 함 -> 클래스는 페이지 내 많을 수 있으므로
+      document.getElementsByClassName('title1')[0].innerHTML = notiTtl;
+      document.getElementById('alert3').style.display= alertShow;
+    }
+
+
+    //  비슷한 기능을 가지고 있고, 한개의 함수로 바로 적용시키고 싶을때
+    //  'none', 'block' 파라미터값을 넣어 사용가능
+
+    // function alertShow() {
+    //   document.getElementById('alert2').style.display= 'block';
+    // }
+    // function alertHide() {
+    //   document.getElementById('alert2').style.display='none'
+    // }
+  </script>
+
+</body>
+</html>

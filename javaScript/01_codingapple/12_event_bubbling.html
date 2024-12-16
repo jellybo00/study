@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+      .list-group {max-height: 0;overflow: hidden; transition: all 0.3s;}
+      .list-group.show {max-height: 100%; height:100%}
+
+
+      .black-bg {
+        width : 100%;
+        height : 100%;
+        position : fixed;
+        background : rgba(0,0,0,0.5);
+        z-index : 5;
+        padding: 30px;
+        opacity: 0;
+        /* display:none 대용으로 애니메이션쓸때는
+          visibility : hidden; 쓰면 숨겨줌  */
+        visibility : hidden;
+        transition: all 0.6s;
+      }
+      .black-bg.is_show {
+        opacity: 1;
+        visibility : visible;
+      }
+      .white-bg {
+        background: white;
+        border-radius: 5px;
+        padding: 30px;
+      }
+
+      .dark-mode {
+        background: #000;
+        color: #fff;
+      }
+
+      .main-bg {
+        background: lightgray;
+        padding: 100px 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="email">
+          </div>
+          <div class="my-3">
+            <input type="password" class="form-control"  id="password">
+          </div>
+          <button type="submit" class="btn btn-primary" id="send">전송</button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // 전송버튼 누르면
+      // input에 입력한 값이 공백이ㅏ면 알림창 띄워주세요
+
+       // 패스워드 입력란도 공백검사, 비번이 6자 미만이면 길게 입력하고 안내문 띄우기
+      $('form').on('submit',function(e){
+        // 인풋에 입력된 값 받기
+        if(document.getElementById('email').value == '') {
+          e.preventDefault();
+          alert('아이디입력안함')
+        }
+        if(/\S+@\S+\.\S+/.test(document.getElementById('email').value)){
+          e.preventDefault();
+          alert('이메일 아님~ 다시 입력하세요')
+        }
+        if(document.getElementById('password').value == '') {
+          e.preventDefault();
+          alert('비번입력안함')
+        } else if (document.getElementById('password').value.length  < '6') {
+          e.preventDefault();
+          alert('더 길게 입력해라잉')
+        }
+        if ( /[A-Z]/.test(document.getElementById('password').value) == false ){
+          alert('대문자없는데요')
+        }
+      })
+
+      // input -> 인풋값이 바뀔때
+      // change -> 인풋 입력 후 포커스 잃으면 동작
+      document.getElementById('email').addEventListener('change',function(){
+        console.log('안녕')
+      })
+
+      // 사실 조건문은 if문 안에 true/false넣어야 잘 작동함 (boolean 타입형)
+
+      // 조건식을 연달아 확인, 무한대로 else if문 쓸 수 있음
+      if (1 == 3){
+        console.log('네 맞아요')
+      } else if (3 == 3) {
+        console.log('네 맞아요1')
+      } else {
+
+      }
+
+
+      // 앞의 조건식과 상관없이 두번째 if문도 실행함
+      if (1 == 3){
+        console.log('네 맞아요')
+      }
+      if (3 == 3) {
+        console.log('네 맞아요1')
+      }
+
+      // if문 두개 쓰는거랑 else if문이랑 뭐가 다를까?
+      // -> else if문의 경우 그게 아니면~ 이걸 확인해줘 라는 의미를 가지고 있음
+      // 앞에 조건식이 참일경우 뒤의 else 뒤의 조건식은 실행 안함
+
+
+
+      function 삼육구게임(num) {
+        if (num % 9 == 0 ){
+          console.log('박수 박수 ')
+        }else if (num % 3 == 0) {
+          console.log('수박')
+        }else {
+          console.log('통과')
+        }
+
+      }
+      삼육구게임(1)
+
+      function 합격했냥(aNum , bNum) {
+        if (aNum < 40 || bNum < 40 ){
+          console.log('불합격')
+        }else if (aNum + bNum >= 120){
+          console.log('합격')
+        } else {
+          console.log('불합격')
+        }
+      }
+      합격했냥(30, 100)
+
+    </script>
+
+
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <span class="badge bg-dark">Dark 🔄</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+
+    <ul class="list-group" id="test">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+
+    <div class="main-bg">
+      <h4>사장님이 미쳐써요</h4>
+      <!-- 버튼 누르면 모달창 black-bg 노출 시키기 -->
+      <button id="login" class="login-btn btn btn-danger">login</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+      // querySelector -> 편리하지만 제일 상단의 1개만 찾아줌
+      // querySelectorAll -> 다 찾아줌 하지만[idx] 선언해줘야 함
+
+      document.querySelector('.navbar-toggler').addEventListener('click',function(){
+        document.querySelector('.list-group').classList.toggle('show')
+      })
+
+
+
+
+      // 로그인 모달창
+      document.querySelector('.login-btn').addEventListener('click',function(){
+        document.querySelector('.black-bg').classList.add('is_show')
+      })
+      document.querySelector('#close').addEventListener('click',function(){
+        document.querySelector('.black-bg').classList.remove('is_show')
+      })
+
+      // $('.login-btn').on('click',function(){
+      //   $('.black-bg').addClass('is_show')
+      // })
+      // $('#close').on('click',function(){
+      //   $('.black-bg').removeClass('is_show')
+      // })
+
+
+      // 이벤트 버블링
+      // 검은 bg 닫기
+      document.querySelector('.black-bg').addEventListener('click',function(e){
+
+        // e.target; //유저가 실제로 누른거
+        // e.currentTarget; //이벤트 리스너 달린 곳 (this와 같음)
+        // e.preventDefault() //이벤트 기본 동작 막아줌
+        // e.stopPropagation()//내 상위요소로 이벤트 버블링 막아줌
+        if (e.target == e.currentTarget) {
+          document.querySelector(".black-bg").classList.remove('is_show')
+        }
+
+      })
+    </script>
+
+    <!-- 다크모드 -->
+    <script>
+
+      // 변수의 선언 (나 변수 만든다~)
+      var 이름   = 'Kim';
+      // 변수의 재할당
+      이름 = 'Park'
+
+      // 할당 : 변수에 자료넣기 (등호 사용)
+
+      // 선언따로, 할당따로 가능
+
+      // 범위 : 함수 안에서 변수를 만들면, 사용가능 범위는 함수 내에서만 사용가능
+      //  바깥에서 만든 변수는 함수 내에서 사용 가능
+      function 함수(){
+        var 이름   = 'Kim';
+      }
+
+      // var , let, const 다 변수로 생성 가능
+
+      // var = 재선언 O, 재할당 O, 범위 function
+      // let = 재선언 X, 재할당 O ,범위 {}
+      // const 재선언 X , 재할당 X ,범위 {} -> 변하지 않는  값 넣기 좋음
+
+
+
+      // 뱃지  클릭 홀수면 light
+      // 뱃지  클릭 짝수면 Dark
+
+      var count = 0;
+
+      $('.badge').on('click',function(){
+        count = count + 1;
+        console.log(count)
+
+        // count값 나누기 2 했을때 1이 남으면 홀수~
+        if(count % 2 == 1 ){
+          $('.badge').text('light 🔄')
+          $('body').removeClass('dark-mode')
+
+        } else {
+          $('.badge').text('Dark 🔄')
+          $('body').addClass('dark-mode')
+        }
+
+      })
+    </script>
+
+
+
+
+
+  </body>
+</html>

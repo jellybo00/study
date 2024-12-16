@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>캐러셀 슬라이드</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <style>
+    .slide_container {
+      width: 300vw;
+      transition: all 1s;
+
+    }
+    .slide_box {
+      width: 100vw;
+      float: left;
+    }
+    .slide_box img {
+      width: 100%;
+    }
+  </style>
+
+</head>
+<body>
+  <!-- one-way 애니메이션 들어있는 UI 만들기
+      1. 시작화면
+      2. 종료화면
+      3. 원할때 최종화면으로 변하게
+      4. transistion으로 애니메이션 추가
+   -->
+
+
+
+
+  <div style="overflow: hidden;">
+    <div class="slide_container">
+      <div class="slide_box">
+        <img src="https://codingapple-cdn.b-cdn.net/wp-content/uploads/2022/02/car1.png" alt="">
+      </div>
+      <div class="slide_box">
+        <img src="https://codingapple-cdn.b-cdn.net/wp-content/uploads/2022/02/car2.png" alt="">
+      </div>
+      <div class="slide_box">
+        <img src="https://codingapple-cdn.b-cdn.net/wp-content/uploads/2022/02/car3.png" alt="">
+      </div>
+    </div>
+  </div>
+  <button class="slide_prev">이전</button>
+  <button class="slide_1">1</button>
+  <button class="slide_2">2</button>
+  <button class="slide_3">3</button>
+  <button class="slide_next">다음</button>
+
+  <script>
+    // $('.slide_2').on('click',function(){
+    //   $('.slide_container').css('transform','translate(-100vw)' )
+    // })
+
+
+    document.querySelector('.slide_1').addEventListener('click',function(){
+       document.querySelector('.slide_container').style.transform="translate(0)"
+    })
+
+    document.querySelector('.slide_2').addEventListener('click',function(){
+       document.querySelector('.slide_container').style.transform="translateX(-100vw)"
+    })
+
+    document.querySelector('.slide_3').addEventListener('click',function(){
+       document.querySelector('.slide_container').style.transform="translateX(-200vw)"
+    })
+
+
+    // 다음버튼 누르면
+    //  지금 보이는 사진이 1이면, 2번사진 보여주세요
+    //  지금 보이는 사진이 2이면, 3번사진 보여주세요
+
+
+
+    // $('.slide_next').on('click',function(){
+    //   if (nowSlide == 1 ) {
+    //     $('.slide_container').css('transform','translate(-100vw)' )
+    //     nowSlide += 1
+    //   } else if (nowSlide  == 2 ) {
+    //     $('.slide_container').css('transform','translate(-200vw)' )
+    //     nowSlide += 1
+    //   }
+
+    // })
+
+
+
+    var nowSlide = 1
+
+    document.querySelector('.slide_next').addEventListener('click',function(){
+      document.querySelector('.slide_container').style.transform="translateX(-" + `${nowSlide}`+"00vw)" ;
+      nowSlide += 1
+    })
+
+    document.querySelector('.slide_prev').addEventListener('click',function(){
+      document.querySelector('.slide_container').style.transform="translateX(+" + `${nowSlide}`+"00vw)" ;
+      nowSlide -= 1
+    })
+
+
+  </script>
+
+
+
+
+</body>
+</html>

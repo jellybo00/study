@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+
+      </div>
+    </div>
+
+
+    <div class="container" style="margin-top: 40px;">
+      <button class="btn btn-danger" id="more">더보기</button>
+      <button class="btn btn-success" id="price">가격순 정렬</button>
+      <button class="btn btn-primary" id="sort1">다나가순 정렬</button>
+      <button class="btn btn-dark" id="filter">6만원 이하</button>
+    </div>
+    <script>
+      var products = [
+        { id : 0, price : 70000, title : 'Blossom Dress' },
+        { id : 1, price : 50000, title : 'Springfield Shirt' },
+        { id : 2, price : 60000, title : 'Black Monastery' }
+      ];
+
+
+      products.forEach((a, i)=>{
+        var 템플릿 =
+        `<div class="col-sm-4">
+          <img src="https://via.placeholder.com/600" class="w-100">
+          <h5>${products[i].title}</h5>
+          <p>가격 : ${products[i].price}</p>
+          <button class="buy">구매</button>
+        </div>`;
+        $('.row').append(템플릿)
+      });
+
+      var 변수 = 0
+
+      $('#more').on('click',function(){
+        $.get('https://codingapple1.github.io/js/more1.json').done(function(data){
+          console.log(data)
+
+          data.forEach((a, i)=>{
+            var 템플릿 =
+            `<div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>${data[i].title}</h5>
+              <p>가격 : ${data[i].price}</p>
+
+            </div>`;
+            $('.row').append(템플릿)
+          });
+
+        }).fail(function(){
+          console.log('ajax 실패')
+        })
+      })
+
+
+      // var 어레이 = [7, 3, 5, 2, 40]
+      // var 어레이2 = ['a', 'b', 'c']
+      // 어레이2.sort(function(a, b) {
+      //   return a -  b
+      // })
+      // console.log(어레이2)
+
+      $('#price').on('click',function() {
+        products.sort(function(a,b){
+          return a.price - b.price
+        })
+        $('.row').html('')
+        products.forEach((a, i)=>{
+            var 템플릿 =
+            `<div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>${products[i].title}</h5>
+              <p>가격 : ${products[i].price}</p>
+            </div>`;
+            $('.row').append(템플릿)
+          });
+      })
+
+
+      // var 어레이 = [7, 3, 5, 2, 40]
+      // var 어레이2 = ['a', 'b', 'c']
+      // var 필터어레이 = 어레이.map(function(a, b) {
+      //   return a * 4
+      // })
+      // console.log(필터어레이)
+
+      // var 어레이 = ['가', '나', '다']
+      // 어레이.sort(function(a,b){
+      //   if (a.title < b.title) {
+      //     return 1
+      //   } else {
+      //     return -1
+      //   }
+      // })
+
+
+      $('#sort1').click(function(){
+        products.sort(function(a,b){
+          if (a.title < b.title) {
+            return 1
+          } else {
+            return -1
+          }
+        })
+        console.log(products);
+        $('.row').html('')
+        products.forEach((a, i)=>{
+          var 템플릿 =
+          `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${products[i].title}</h5>
+            <p>가격 : ${products[i].price}</p>
+          </div>`;
+          $('.row').append(템플릿)
+        });
+      })
+
+      $('#filter').click(function(){
+        var newProduct =  products.filter(function(a){
+          return a.price <= 60000
+        })
+        console.log(newProduct);
+        $('.row').html('')
+        newProduct.forEach((a, i)=>{
+          var 템플릿 =
+          `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${newProduct[i].title}</h5>
+            <p>가격 : ${newProduct[i].price}</p>
+          </div>`;
+          $('.row').append(템플릿)
+        });
+      })
+
+
+      </script>
+  </body>
+</html>

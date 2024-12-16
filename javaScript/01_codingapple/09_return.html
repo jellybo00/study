@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>return 문법</title>
+</head>
+<body>
+  콘솔로그 확인~!
+
+<script>
+function 함수 () {
+  // 함수쓰고 그 자리에 반환해주고 싶으면 (그대로 보여주고싶을때)
+  return 123
+}
+
+var 변수= 함수()
+console.log(변수)
+
+// return - > 아무거나 가능, 함수 종료기능도 가지고있어 아래 더 있는 함수는 실행안됨
+
+function vat(a){
+  var num = (a * 1.1).toFixed(2)
+  return parseFloat(num)
+}
+
+console.log(vat(55555))
+
+
+</script>
+
+
+
+
+</body>
+</html>

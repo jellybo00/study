@@ -1,11 +1,125 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jellybo.. 나.. 공부한ㄷ ㅏ !</title>
+<link rel="stylesheet" as="style" crossorigin target="_blank" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<style>
+@charset "utf-8";
+*{margin:0;padding:0;border:0;font-family:'Pretendard Variable', Pretendard, '맑은 고딕', sans-serif;font-size:13px;color:#000;line-height:18px;box-sizing:border-box}
+article,aside,dialog,footer,header,section,footer,nav,figure,main{display:block}
+html,body{height:100%;-webkit-text-size-adjust:none;-ms-text-size-adjust:none}
+body{word-wrap:break-word;word-break:break-all}
+fieldset,li,img{border:0;vertical-align:top}
+ul,ol{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+button{overflow:visible;border:0;background-color:transparent;cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+address,caption,em{font-style:normal}
+a, a:visited{color:#000;text-decoration:none}
+a:hover{color:red}
+.blind, caption span, legend{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:1px;line-height:100px;white-space:nowrap}
+.header{position:sticky;top:0;padding:20px 200px 20px 20px;background:#000}
+.header h1{display:inline-block;font-size:24px;font-weight:600;line-height:28px;color:#fff}
+.shortcut_bx{display:inline-block;position:absolute;top:50%;right:20px;transform:translateY(-50%)}
+.shortcut_bx .btn_toggle{padding:5px 10px;border-radius:4px;background:#fff}
+.shortcut_bx .btn_toggle:hover{background:#e8f0ff}
+.shortcut_bx .btn_toggle:after{display:inline-block;font-size:12px;content:'🔻'}
+.shortcut_list{display:none;position:absolute;top:34px;right:0;padding:10px 15px;border:1px solid rgba(0,0,0,.25);border-radius:4px;background:#fff;white-space:nowrap}
+.shortcut_list li + li{margin-top:4px}
+.shortcut_list a{line-height:20px}
+.shortcut_bx.is_active .shortcut_list{display:block}
+.shortcut_bx.is_active .btn_toggle:after{content:'🔺'}
+.label_bx{display:inline-block;padding:15px 18px}
+.new, .up{display:inline-block;min-height:12px;padding:0 4px;border-radius:3px;color:#fff !important;line-height:16px}
+.new{background:#fd3939}
+.up{background:#45a7fb}
+.view_bx{display:none;position:fixed;top:67px;right:0;background-color:#fff;outline:1px solid #000}
+.view{width:100%;height:100%;border:0}
+.section{padding:20px 20px 30px}
+.section h2{padding-bottom:5px;border-bottom:3px solid #666;font-size:18px;font-weight:600}
+.section h3{padding:30px 0 5px;border-bottom:1px solid #666;font-size:15px;font-weight:600}
+.section_page li{min-height:36px;border-bottom:1px dashed rgba(0, 0, 0, 0.08);line-height:35px}
+.section_page li span{margin-left:3px;font-size:12px;color:#999}
+.section_page li a{padding:5px 10px}
+.section_info p{padding:6px 5px 5px}
+.section_info p:before{display:inline-block;margin-right:5px;content:'✅'}
+.footer{padding:20px;background:#000;color:#fff;text-align:center}
+.footer strong{color:#fff;letter-spacing:5px}
+</style>
 </head>
 <body>
-    index
+<div class="wrap">
+  <header class="header">
+    <h1>study :: 산출물</h1>
+  </header>
+
+  <!-- <div class="label_bx">
+    <span class="new">&nbsp;</span> NEW <span class="up">&nbsp;</span> UPDATE
+  </div> -->
+
+  <div class="view_bx">
+    <!-- 노출 크기는 원하는 대로 조절 -->
+    <iframe class="view" src="about:blank" style="width:752px;height:672px"></iframe>
+  </div>
+
+  <section class="section section_page">
+    <h2>javascript</h2>
+    <h3>codingApple</h3>
+    <ul>
+      <li><a target="_blank" href="javaScript/01_codingapple/00_intro.html">셀렉터란?</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/01_alertBox.html">동적 UI 만들기 - Alert 박스 만들기(function문법,function의 파라미터 문법, 이벤트 리스너)</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/02_navBar.html">서브메뉴 만들면서 classList 다루기</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/03_modal.html">모달창 & 폼으로 배우는 if else & 정규식으로 검사하는 이메일 형식</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/04_lv1_study.html">369 , 합격숙제하며 배우는 조건문 & 비교연산자자</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/05_darkMode.html">변수 문법과 darkMode</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/06_lv2_study.html">변수와 사칙연산하며 실력향상하기 숙제</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/07_timer.html">setInterval & setTimeout 타이머</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/08_caarousal.html">캐러셀 슬라이드 만들기기</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/09_return.html">return 문법 & 소수 다루기</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/10_scrol_eventl.html">스크롤 이벤트</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/11_tab.html">tab으로 배우는 for반복문</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/12_event_bubbling.html">모달창 배경클릭 이벤트 배우는 이벤트 버블링</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/13_array_object.html">Array 와 Object 자료형</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/14_list.html">쇼핑몰 리스트 만들면서 배우는 데이터바인딩 (feat.Array/Object/ajax)</a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/15_select.html">select 다루면서 배우는 forEach / for in </a></li>
+      <li><a target="_blank" href="javaScript/01_codingapple/16_shop_list.html">쇼핑몰기능 만들면서 배우는  sort, map, filter</a></li>
+
+
+  </section>
+
+
+
+
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(function(){
+  $('.section_page a').each(function(){
+    $('<span>/ '+$(this).attr('href')+'</span>').appendTo($(this));
+  });
+});
+$(function(){
+    var viewBx = $('.view_bx');
+    var view = $('.view');
+    $('.section.section_page a').on('mouseenter',function() {
+      viewBx.show();
+      view.attr('src', $(this).attr('href'));
+      return false;
+    }).on('mouseleave', function(){
+      viewBx.hide();
+    });
+});
+$(function(){
+  $('.shortcut_bx .btn_toggle').on('click',function() {
+    $('.shortcut_bx').toggleClass('is_active');
+    return false;
+  });
+});
+</script>
 </body>
 </html>
