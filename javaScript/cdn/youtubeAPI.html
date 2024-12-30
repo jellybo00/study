@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>youTube API 다루기</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    .video_lst{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .video_lst li {
+      width: calc(100%/3 - 20px);
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
+    .video_lst li:first-child,
+    .video_lst li:nth-child(3n+4) {
+      margin-left: 0;
+    }
+    .video_lst li button {
+      display: block;
+      width: 100%;
+    }
+    .cover_img {
+      position:relative;
+      padding-top: 56.25%;
+      display: block;
+    }
+    .cover_img img {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      width: 100%; height: 100%;
+      display: block;
+    }
+    .video_name {
+      font-size: 15px;
+      margin-top: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* modal */
+  .dimmed {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.6)
+  }
+
+  .modal_wrap {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 510;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+      -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      -o-transform: translate(-50%,-50%);
+      width: 1000px;
+  }
+
+  .dimmed.show_modal,.modal_wrap.show_modal {
+      display: block
+  }
+
+  .modal_wrap .inner {
+      position: relative;
+      margin-top: 0;
+  }
+
+  .modal_wrap .bx_video {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%
+  }
+
+  .modal_wrap .bx_video .modal_player {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+      -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      -o-transform: translate(-50%,-50%)
+  }
+
+  .modal_wrap .modal_close {
+      display: block;
+      position: absolute;
+      top: -68px;
+      right: 0;
+      width: 68px;
+      height: 68px;
+  }
+  .ico_close {
+    display: block;
+    width: 68px; height: 68px;
+    background: rgba(0,0,0,.4) no-repeat  center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' style='fill: rgba(255, 255, 255, 1);transform: ;msFilter:;'%3E%3Cpath d='m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z'%3E%3C/path%3E%3C/svg%3E");
+  }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="inner">
+
+      <div class="guide_desc">
+        <p> - 리스트 클릭 시 해당하는 영상이 팝업에 노출</p>
+      </div>
+
+
+      <ul class="video_lst">
+        <li>
+          <!-- [D] 아래 이미지와 동일한 아이디 넣어 영상 재생   -->
+          <button type="button" onclick="modalVideo('KrAMRnPLlQ0')">
+            <span class="cover_img">
+              <!--  [D] 영상이 바뀌면 id값 바꿔 넣어주세요
+                      https://img.youtube.com/vi/영상ID/maxresdefault.jpg -->
+              <img src="https://img.youtube.com/vi/KrAMRnPLlQ0/maxresdefault.jpg" alt="">
+            </span>
+            <p class="video_name">노동요1</p>
+          </button>
+        </li>
+        <li>
+          <button type="button" onclick="modalVideo('kSp2FamelIE')">
+            <span class="cover_img">
+              <img src="https://img.youtube.com/vi/kSp2FamelIE/maxresdefault.jpg" alt="">
+            </span>
+            <p class="video_name">노동요2</p>
+          </button>
+        </li>
+        <li>
+          <button type="button" onclick="modalVideo('VwmPjq9Li8g')">
+            <span class="cover_img">
+              <img src="https://img.youtube.com/vi/VwmPjq9Li8g/maxresdefault.jpg" alt="">
+            </span>
+            <p class="video_name">[𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭] 압도하라! Always, KIA 타이거즈! 팀 응원가 플레이리스트🎶</p>
+          </button>
+        </li>
+        <li>
+          <button type="button" onclick="modalVideo('ktdRZJz9mI4')">
+            <span class="cover_img">
+              <img src="https://img.youtube.com/vi/ktdRZJz9mI4/maxresdefault.jpg" alt="">
+            </span>
+            <p class="video_name">카모 노래 모음 | 신곡, 피처링 포함, 독보적인 음악 | CAMO playlist</p>
+          </button>
+        </li>
+        <li>
+          <button type="button" onclick="modalVideo('C9LNocG4Z0w')">
+            <span class="cover_img">
+              <img src="https://img.youtube.com/vi/C9LNocG4Z0w/maxresdefault.jpg" alt="">
+            </span>
+            <p class="video_name">ᴘʟᴀʏʟɪꜱᴛ 듣다보면 빠져드는 감성힙합 플리 | 애쉬아일랜드, 빅나티, dori, 파테코···</p>
+          </button>
+        </li>
+        <li>
+          <button type="button" onclick="modalVideo('FFZfX6eAOU4')">
+            <span class="cover_img">
+              <img src="https://img.youtube.com/vi/lwRLpDUVJjg/maxresdefault.jpg" alt="">
+            </span>
+            <p class="video_name">[Playlist] 2000년대 싸이월드 BGM 플레이리스트♥️</p>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- [D] modal 오픈 시 .show_modal 추가   -->
+  <div class="dimmed"></div>
+
+  <!-- [D] modal 오픈 시 .show_modal 추가   -->
+  <!-- [D] 추가 동영상 재생 팝업 -->
+  <div class="modal_wrap">
+    <div class="inner">
+      <div class="bx_video">
+        <div class="modal_player" id="player"></div>
+      </div>
+
+      <button class="modal_close">
+        <i class="ico_close"></i> <span class="blind">팝업 닫기</span>
+      </button>
+    </div>
+  </div>
+
+
+
+  <!-- script  -->
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+  <script>
+
+  // 1. API 로드
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 2. YouTube IFrame Player API 준비
+  var player;
+  function onYouTubeIframeAPIReady() {
+       initPlayer(0);  // 초기 플레이어를 컨트롤러 없이 생성
+  }
+
+  // 3. 플레이어 초기화 함수
+  function initPlayer(controls) {
+      player = new YT.Player('player', {
+          height: '100%',
+          width: '100%',
+          videoId: '', // 영상이 바뀌면 id 변경
+          playerVars: {
+              'autoplay': controls ? 1 : 0,
+              'controls': 1,
+              'rel': 0,
+              'showinfo': 0,
+              'modestbranding': 0,
+              'playsinline': 1,
+              'enablejsapi': 1,
+              'color': 'white',
+              'iv_load_policy': 3,
+              'disablekb': 1
+          }
+      });
+  }
+
+  // 팝업 open
+  function modalVideo(videoID) {
+
+    player.loadVideoById(videoID);
+
+    $('.dimmed').addClass('show_modal');
+    $('.modal_wrap').addClass('show_modal');
+  }
+
+  // 팝업 close
+  $('.modal_close').on('click',function(){
+    player.stopVideo()
+    $('.dimmed').removeClass('show_modal');
+    $('.modal_wrap').removeClass('show_modal');
+    // 기존재생되었던 영상 안보이게 영상 초기화, 영상 초기화
+    $('.bx_video').html('<div class="modal_player" id="player"></div>')
+    initPlayer(0);
+  })
+
+  </script>
+
+
+
+</body>
+</html>
