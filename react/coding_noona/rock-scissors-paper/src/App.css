@@ -16,6 +16,11 @@
     padding: 1em;
     box-sizing: border-box;
 }
+.box img {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
 .box +.box {
     margin-left: 2%;
 }
@@ -32,6 +37,7 @@
 }
 .GameBtn img {
     width: 100%;
+    max-width: 100%;
 }
 .btn_cont {
     display: flex;
