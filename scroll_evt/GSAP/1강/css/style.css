@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300..700;1,300..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Reset */
+* {margin: 0;padding: 0;}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, tbody, tfoot, thead, tr, th, td{margin:0;padding:0;}
+a {color: inherit; text-decoration: inherit;}
+li {list-style: none;}
+address, em, i {font-style: normal;}
+button {background: none; border: none;}
+img {vertical-align: middle;}
+
+.en {font-family: "Public Sans", sans-serif;}
+.en2 {font-family: "Cormorant Infant", serif;}
+body {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+.wrap {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+}
+
+/* header */
+.header {
+    width: 100%;
+    position: fixed;
+    left: 0; top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    padding: 30px 60px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+.header .logo {color: #fff;}
+.header .menuOpen { display: none; transition:0.3s ;}
+.gnb ul {
+    display: flex;
+    justify-content: space-between;
+}
+.gnb ul li {
+    margin-left: 70px;
+}
+.gnb ul li a {
+    display: block;
+}
+
+
+
+
+
