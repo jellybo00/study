@@ -89,3 +89,35 @@ body {
     transform: translateY(-100%);
 }
 
+/* visual */
+.visual {
+    width: 100%;
+    height: 100vh;
+    padding-top: 125px;
+    box-sizing: border-box;
+    position:relative;
+    letter-spacing: -1px;
+}
+.visual .main_txt {
+    font-size: 140px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 150px 60px;
+    background: red;
+    display: inline-block;
+}
+.visual .main_txt p {
+    overflow: hidden;
+    
+}
+.visual .sub_txt {
+    margin-left: 20%;
+}
+.visual .scroll {
+    position: fixed;
+    left: 60px; bottom: 40px;
+}
+.visual .svg_ani {
+    position: absolute;
+    right: -2%; top: 9%; width: 55%; transform: rotate(-10deg);
+}
