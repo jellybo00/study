@@ -103,7 +103,6 @@ body {
     font-weight: 400;
     line-height: 1.2;
     margin: 0 0 150px 60px;
-    background: red;
     display: inline-block;
 }
 .visual .main_txt p {
@@ -120,4 +119,75 @@ body {
 .visual .svg_ani {
     position: absolute;
     right: -2%; top: 9%; width: 55%; transform: rotate(-10deg);
+}
+.visual.motion .main_txt {
+    transform: translate3d(0,0,0) skewY(0deg);
+    overflow: hidden;
+}
+.visual.motion .main_txt p span {
+    display: block;
+    animation-name: textAni;
+    animation-duration: 1.8s;
+}
+.visual.motion .main_txt p:nth-child(2) span{
+    animation-duration: 1.7s;
+}
+.visual.motion .main_txt p:nth-child(3) span{
+    animation-duration: 1.5s;
+}
+
+@keyframes textAni{
+    0% {opacity: 0;}
+    30% {opacity: 0; transform: translate3d(0,-90px,0) skewY(-10deg); transform-origin: top left;}
+}
+
+@keyframes textAni2 {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+}
+.visual.motion .sub_txt { 
+    animation-name: textAni2;
+    animation-duration: 2.3s;
+}
+
+/* svg */
+.visual.motion #svgAni01 {
+    stroke-dasharray: 675;
+    stroke-dashoffset: 675;
+    animation: ani1 .5s linear 2s forwards;
+}
+.visual.motion #svgAni03 {
+    stroke-dasharray: 3509;
+    stroke-dashoffset: 3509;
+    animation: ani3 2s linear .1s forwards;
+}
+.visual.motion #svgAni04 {
+    stroke-dasharray: 66;
+    stroke-dashoffset: 66;
+    animation: ani4 0.2s linear 1s forwards;
+}
+.visual.motion #svgAni05 {
+    stroke-dasharray: 55;
+    stroke-dashoffset: 55;
+    animation: ani5 0.2s linear 0s forwards;
+}
+@keyframes ani1 {
+    0% { stroke-dashoffset: 675;}
+    100% { stroke-dashoffset: 0;}
+}
+@keyframes ani3 {
+    0% { stroke-dashoffset: 3059;}
+    100% { stroke-dashoffset: 0;}
+}
+@keyframes ani4 {
+    0% { stroke-dashoffset: 64;}
+    100% { stroke-dashoffset: 0;}
+}
+@keyframes ani5 {
+    0% { stroke-dashoffset: 55;}
+    100% { stroke-dashoffset: 0;}
 }
