@@ -1,0 +1,145 @@
+@charset "utf-8"
+
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.en {
+  font-family: "Public Sans", sans-serif;
+}
+.en2 {
+  font-family: "Cormorant Infant", serif;
+  font-size: 120px;
+  color: #ece0c7;
+  font-weight: normal;
+}
+
+body {
+  background: #17181d;
+  color: #fff;
+}
+.character {
+  height: 100vh;
+  position: relative;
+}
+.character .imgBox {
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.character .imgBox img {
+  width: 100%;
+}
+.character .stage {
+  height: 100%;
+  background: url(../img/img_3.png) no-repeat 0 center;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.con01 {
+  height: 80vh;
+  padding-top: 50px;
+}
+.textBox {
+  width: 100%;
+  height: 80vh;
+  font-size: 6vw;
+  font-family: "Squada One", cursive;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  position: relative;
+}
+.textBox .en1 {
+  font-family: "sriracha", cursive;
+  font-style: italic;
+}
+.textBox ul {
+  position: absolute;
+  top: 0;
+  left: 5%;
+}
+.textBox ul.menu {
+  color: transparent;
+  -webkit-text-stroke: 1px #b1dd40;
+}
+.textBox ul .color {
+  color: #fff;
+  -webkit-text-stroke: none;
+}
+.textBox .container {
+  height: 80px;
+  outline: 1px transparent;
+  overflow: hidden;
+}
+.textBox .container .mask .en1 {
+  color: #b1dd40;
+  -webkit-text-stroke: none;
+}
+
+.con02 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Squada One", cursive;
+  position: relative;
+}
+.con02 h2 {
+  color: #fff;
+  position: absolute;
+  font-size: 11vw;
+}
+.con02 h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+}
+.con02 h2:nth-child(2) {
+  color: #fff;
+  animation: wave 4s ease-in-out infinite;
+}
+@keyframes wave {
+  0%,
+  100% {
+    clip-path: polygon(
+      0% 65%,
+      8% 70%,
+      19% 71%,
+      30% 66%,
+      42% 66%,
+      51% 69%,
+      59% 71%,
+      69% 68%,
+      83% 64%,
+      91% 64%,
+      98% 64%,
+      100% 67%,
+      100% 99%,
+      0% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      0% 76%,
+      7% 77%,
+      17% 80%,
+      25% 72%,
+      33% 71%,
+      41% 76%,
+      54% 78%,
+      64% 73%,
+      76% 73%,
+      86% 77%,
+      94% 75%,
+      100% 72%,
+      100% 100%,
+      1% 100%
+    );
+  }
+}

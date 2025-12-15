@@ -1,0 +1,450 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital@1&family=Noto+Sans+KR&family=Public+Sans&display=swap");
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+li {
+  list-style: none;
+}
+address,
+em,
+i {
+  font-style: normal;
+}
+button {
+  background: none;
+  border: none;
+}
+img {
+  vertical-align: middle;
+}
+
+/* 영어 폰트 */
+.en {
+  font-family: "Public Sans", sans-serif;
+}
+.en2 {
+  font-family: "Cormorant Infant", serif;
+}
+
+/* layout */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.wrap {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+}
+.visual {
+  padding-top: 150px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.visual .inner {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.visual .inner .textBox {
+  width: 60%;
+  line-height: 1.4;
+}
+.visual .inner .textBox .title {
+  font-size: 180px;
+}
+.visual .inner .textBox .title .en2 {
+  font-size: 220px;
+}
+.visual .inner .textBox .subTitle {
+  font-size: 30px;
+  margin: 30px 0;
+}
+.visual .inner .aniBox {
+  width: 350px;
+  height: 350px;
+  position: relative;
+  margin-top: 300px;
+}
+.visual .inner .aniBox img {
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+}
+.visual .inner .aniBox img.spin {
+  left: 0;
+  top: 0;
+  animation-name: spin;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.visual .inner .aniBox img.arrow {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  width: 20%;
+}
+.visual.motion .inner .textBox {
+  transform: translate3d(0, 0, 0);
+}
+.visual.motion .inner .textBox p {
+  animation-name: textAni3;
+  animation-duration: 1s;
+}
+@keyframes textAni3 {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+}
+.visual.motion .inner .textBox p:nth-child(2) {
+  animation-duration: 1.2s;
+}
+.visual.motion .inner .textBox p:nth-child(3) {
+  animation-duration: 1.4s;
+}
+
+/* work */
+.work {
+  height: 100vh;
+  position: relative;
+}
+.work ul {
+  display: flex;
+  padding: 3% 30%;
+  box-sizing: border-box;
+}
+.work ul li {
+  width: 700px;
+  padding: 100px;
+  box-sizing: border-box;
+  flex-shrink: 0 !important;
+}
+.work ul li a {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+.work ul li a .imgBox {
+  position: relative;
+}
+.work ul li a .imgBox img {
+  width: 100%;
+}
+.work ul li a .textBox {
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+.work ul li a .textBox .title {
+  font-size: 60px;
+}
+.work ul li a .textBox .text {
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+/* hover */
+.work ul li a .imgBox::before {
+  content: "";
+  width: 140px;
+  height: 140px;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  background: url(../img/readMore2.png) no-repeat center / 30px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: 2;
+  transition: all 0.3s;
+  opacity: 0;
+}
+.work ul li a .imgBox::after {
+  content: "";
+  width: 0%;
+  height: 0%;
+  border-radius: 100%;
+  background: #fff url(../img/readMore3.png) no-repeat center / 130px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: 1;
+  transition: all 0.3s;
+  animation-name: spin2;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+.work ul li a .imgBox:hover img {
+  filter: brightness(50%);
+  transition: all 0.3s;
+}
+.work ul li a .imgBox:hover::before {
+  opacity: 1;
+}
+.work ul li a .imgBox:hover::after {
+  opacity: 1;
+  width: 140px;
+  height: 140px;
+}
+@keyframes spin2 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* inset을 활용해서 imgbox잘라내기 */
+.work ul li a .imgBox {
+  clip-path: inset(30%);
+}
+.work ul li a .textBox {
+  opacity: 0;
+}
+
+/* counter */
+.work .counter {
+  position: absolute;
+  font-size: 50px;
+  right: 8%;
+  bottom: 8%;
+  letter-spacing: -3px;
+  color: #fff;
+}
+.work .counter .now {
+  font-size: 42px;
+}
+.work ul li .num {
+  width: 100%;
+}
+
+.con03 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.con03 h2 {
+  font-size: 68px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* 반응형 */
+@media screen and (max-width: 1300px) {
+  .visual {
+    padding-top: 120px;
+  }
+  .visual .inner {
+    width: 90%;
+  }
+  .visual .inner .textBox {
+    transform: translate(0, 0);
+  }
+  .work ul {
+    padding: 3% 20%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .visual .inner .textBox {
+    width: 50%;
+  }
+  .visual .inner .textBox .title {
+    font-size: 20vw;
+  }
+  .visual .inner .textBox .title .en2 {
+    font-size: 23vw;
+  }
+  .visual .inner .aniBox {
+    bottom: 10%;
+  }
+  .work {
+    height: auto;
+  }
+  .work ul {
+    padding: 0% 5%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .work ul li {
+    width: 45%;
+    padding: 0;
+    margin-top: 150px;
+  }
+  .work ul li:nth-child(2n) {
+    margin-top: 0;
+  }
+  .work ul li a .imgBox {
+    clip-path: inherit;
+  }
+  .work ul li a .textBox {
+    opacity: 1;
+    position: static;
+  }
+  .work ul li a .textBox .title {
+    font-size: 35px;
+  }
+  .work ul li a .textBox .text {
+    font-size: 16px;
+  }
+  .work ul li a .imgBox::after,
+  .work ul li a .imgBox::before {
+    display: none;
+  }
+  .work ul li a .imgBox:hover img {
+    filter: brightness(100%);
+  }
+}
+@media screen and (max-width: 800px) {
+  .visual {
+    height: auto;
+    min-height: 70vh;
+  }
+  .visual .inner .textBox {
+    padding-left: 5px;
+  }
+  .visual .inner .textBox .title .en2 {
+    margin-left: -25px;
+  }
+  .visual .inner .textBox .subTitle {
+    font-size: 25px;
+    margin: 0 0 30px;
+  }
+  .visual.motion .inner .textBox p:nth-child(3) {
+    width: 50%;
+  }
+  .visual .inner .aniBox {
+    width: 300px;
+    height: 300px;
+    margin-top: 460px;
+  }
+  .work ul li:nth-child(2n),
+  .work ul li {
+    width: 100%;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .visual {
+    padding-top: 110px;
+  }
+  .visual .inner .textBox {
+    width: 100%;
+  }
+  .visual .inner .textBox .title .en2 {
+    margin-left: -20px;
+  }
+  .visual .inner .aniBox {
+    display: none;
+  }
+  .visual .inner .textBox .subTitle {
+    font-size: 20px;
+  }
+  .visual.motion .inner .textBox p:nth-child(3) {
+    width: 100%;
+  }
+  .work ul li a .textBox .title {
+    font-size: 28px;
+  }
+  .con03 h2 {
+    font-size: 48px;
+  }
+}

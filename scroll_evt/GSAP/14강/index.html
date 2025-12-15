@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>텍스트 채워지는 애니메이션</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap"
+    />
+  </head>
+  <body>
+    <section class="character">
+      <div class="stage"></div>
+      <div class="imgBox">
+        <img src="./img/spin_large.png" alt="" />
+      </div>
+    </section>
+    <section class="con01">
+      <div class="textBox">
+        <ul class="menu">
+          <li>
+            <span class="color">Object</span>Production
+            <span class="en1">Illutration</span>
+          </li>
+          <li>
+            <span class="color">Photo</span>collage
+            <span class="en1">Photoshop</span>
+          </li>
+          <li>
+            <span class="color">Prototype</span>Production
+            <span class="en1">Illutration</span>
+          </li>
+          <li>
+            <span class="color">Web document</span>Production
+            <span class="en1">Html/CSS</span>
+          </li>
+          <li>
+            <span class="color">Interation</span>Implementation
+            <span class="en1">Javascript</span>
+          </li>
+        </ul>
+        <div class="container">
+          <ul class="mask">
+            <li>
+              <span class="color">Object</span>Production
+              <span class="en1">Illutration</span>
+            </li>
+            <li>
+              <span class="color">Photo</span>collage
+              <span class="en1">Photoshop</span>
+            </li>
+            <li>
+              <span class="color">Prototype</span>Production
+              <span class="en1">Illutration</span>
+            </li>
+            <li>
+              <span class="color">Web document</span>Production
+              <span class="en1">Html/CSS</span>
+            </li>
+            <li>
+              <span class="color">Interation</span>Implementation
+              <span class="en1">Javascript</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="con02">
+        <h2>THANK YOU : )</h2>
+        <h2>THANK YOU : )</h2>
+    </section>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      const frameCount = 14, // 총갯수에서 -1을 빼면 됨
+        offsetValue = 100; // 백분율로 계산
+
+      gsap.to(".stage", {
+        // 2.0 -> maxwidth : 200px 한 컷의 넓이
+        backgroundPosition: -offsetValue * frameCount * 2.0 + "px center",
+        // backgrounPostion의 x축은 offsetValue와  frameCount와 2.0(한컷의 너비) 곱한 값을  뺀값(단위 px)
+        //연산순위 ()가 먼저 연산되고 * / %이며, + - 순임
+
+        ease: "steps(" + frameCount + ")", // 마우스 휠을 프레임 컷수에 맞춰준다
+        scrollTrigger: {
+          trigger: ".character",
+          start: "top top",
+          end: "+=" + frameCount * offsetValue, //frameCount 와 offsetValue를 곱해서 시작점에 더한값
+          pin: true,
+          scrub: true,
+        },
+      });
+
+      //05.텍스트칼라가 채워지는 애니메이션
+      const container = document.querySelector(".container");
+
+      // 문서의 body 요소에 "mousemove" 이벤트가 발생할 때마다 실행되는 콜백 함수를 등록합니다.
+      document.body.addEventListener("mousemove", (e) => {
+        // 마우스 커서의 x좌표를 변수에 할당합니다.
+        const x = e.clientX; //브라우저를 top 0을 기준으로 현재 마우스의 X좌표값 반환
+        const y = e.clientY; //브라우저를  top 0을 기준으로현재 마우스의 Y좌표값 반환
+
+        // gsap 라이브러리의 to() 메서드를 사용해 container 요소의 y축 위치를 변경합니다.
+        gsap.to(container, {
+          y: y, //현재 y 마우스 좌표값
+        });
+
+        // gsap 라이브러리의 to() 메서드를 사용해 "mask" 클래스를 가진 요소의 y축 위치를 변경합니다.
+        // 여기서 변수y값만큼 빼 위치로 변경
+        gsap.to(".mask", {
+          y: -y, //y의 음수값
+        });
+      });
+    </script>
+  </body>
+</html>

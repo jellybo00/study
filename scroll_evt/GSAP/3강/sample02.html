@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP_scrollTrigger_02</title>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid red; */
+      }
+      h2 {
+        font-size: 140px;
+        text-transform: uppercase;
+        color: #000;
+        line-height: 1;
+      }
+      .con01 h2 span {
+        display: block;
+        -webkit-text-stroke: 2px salmon;
+        color: transparent;
+      }
+      .con02 {
+        position: relative;
+        height: 1200px;
+        overflow: hidden;
+      }
+      .con02 .circle {
+        display: block;
+        width: 2500px;
+        height: 2500px;
+        border-radius: 50%;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #000;
+      }
+      .con02 .textBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        /* border: 2px solid blue; */
+        z-index: 2;
+      }
+      .con02 .textBox p {
+        font-size: 64px;
+        font-weight: bold;
+        letter-spacing: -5px;
+        line-height: 1;
+      }
+      .con03 {
+        background: #000;
+      }
+      .con03 h2 {
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="con01">
+        <h2 class="title"><span>GSAP</span>ScrollTrigger</h2>
+      </section>
+      <section class="con02">
+        <span class="circle"></span>
+        <div class="textBox">
+          <p>
+            our releaes <br />
+            get a feeling <br />
+            for the latest <br />
+            selected sound
+          </p>
+        </div>
+      </section>
+      <section class="con03">
+        <h2>ScrollTrigger</h2>
+      </section>
+    </div>
+  </body>
+
+  <script>
+    // gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
+
+    $(function () {
+      //   circle
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".con02",
+            start: "0% 50%",
+            end: "30% 0%",
+            scrub: 1,
+            // markers: true,
+          },
+        })
+        .fromTo(
+          ".circle",
+          {
+            width: "0",
+            height: "0",
+            duration: "10",
+            ease: "elastic",
+            top: "3%",
+          },
+          {
+            width: "2500px",
+            height: "2500px",
+            duration: "10",
+            top: "30%",
+          },
+          0
+        );
+
+      // textbox
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".con02 .textBox",
+            start: "0% 80%",
+            end: "100% 80%",
+            scrub: 1,
+            // markers: true,
+          },
+        })
+        .fromTo(
+          ".textBox",
+          {
+            top: "50%",
+            duration: "5",
+            ease: "elastic",
+            opacity: "0",
+          },
+          { top: "40%", duration: "5", ease: "none", opacity: "1" }
+        ),
+        0;
+    });
+  </script>
+</html>

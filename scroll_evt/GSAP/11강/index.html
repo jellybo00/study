@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마우스포인터따라다니는 이미지_공식컨텐츠</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="con01">
+        <div class="textBox">
+          <h1 class="logo"><img src="./img/J.youngLogo.png" alt="" /></h1>
+          <p class="title en1">Clone coding</p>
+          <p class="txt en">실제 웹사이트작 Step by Step 시리즈입니다</p>
+        </div>
+      </section>
+
+      <section class="con02">
+        <div class="inner">
+          <ul>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img1.jpg" alt="" />
+                <p class="title en1">Musign <span class="dot"></span></p>
+                <p class="color en2">Agency</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img2.jpg" alt="" />
+                <p class="title en1">Y_studio<span class="dot"></span></p>
+                <p class="color en2">Agency</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img3.jpg" alt="" />
+                <p class="title en1">Daebang<span class="dot"></span></p>
+                <p class="color en2">Undustry</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img4.png" alt="" />
+                <p class="title en1">THE DOPDA<span class="dot"></span></p>
+                <p class="color en2">Platform</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img5.jpg" alt="" />
+                <p class="title en1">Hanwha <span class="dot"></span></p>
+                <p class="color en2">Chemical</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img6.jpg" alt="" />
+                <p class="title en1">
+                  Crew al la Mode<span class="dot"></span>
+                </p>
+                <p class="color en2">Agency</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img7.png" alt="" />
+                <p class="title en1">Lahan <span class="dot"></span></p>
+                <p class="color en2">Hotel</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img8.png" alt="" />
+                <p class="title en1">
+                  Korea Consumer <span class="dot"></span>
+                </p>
+                <p class="color en2">Agency</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img class="fadeImg" src="img/img9.png" alt="" />
+                <p class="title en1">Pomain Rice <span class="dot"></span></p>
+                <p class="color en2">Restaurant</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="con03">
+        <h2 class="en1">thank you : )</h2>
+      </section>
+    </div>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+
+      let activeImage; //변수선언
+
+      gsap.utils.toArray(".con02 ul li a").forEach((elem) => {
+        let image = elem.querySelector('img.fadeImg'),
+          //.con02 ul li a를 배열을 forEach문으로  elem매개변수로 반복문실행 ,
+         //elem의 하위요소,showImg를 image에 저장
+
+            align = e => {
+                setX(e.clientX);
+                setY(e.clientY);
+            },
+          //이벤트발생시 현재 마우스 위치의 x, y 좌표를 setX, setY 변수에 할당.
+            //여기서 clientX, clientY값은 스크롤과 상관없이 현재 브라우스의 top 0을 기준으로
+            //마우스의 좌표값을 구합니다.
+
+
+            startPoint = () => document.addEventListener("mousemove", align),
+            //startPoint함수는 mousemove이벤트와 align함수가 실행되는 함수
+
+            stopPoint= () => document.removeEventListener("mousemove", align),
+           //stopPoint함수는 mousemove와 align함수가 제거되는 함수
+
+         fade = gsap.to(image, {autoAlpha: 0.8, ease: "none", paused: true });
+          //변수fade는 이미지가 자동투명도를 0.8되서 일시정지하여 변수 fade에 대입함
+
+
+        elem.addEventListener('mouseenter', (e) => {
+           fade.play();
+           startPoint();
+           //.con02 ul li a영역에 들어갔을때 fade변수가 실행되고,  startPoint()함수가 호출되라
+
+        //조건식:  activeImage가 있으면 참이되어 gsap바로 세팅
+          if ( activeImage) {
+            gsap.set(image, {
+                             x: gsap.getProperty( activeImage, "x"),
+                             y: gsap.getProperty( activeImage, "y")}
+                 );
+          }
+         //이미지의 X값는  activeImage의 x값을 가져오고
+         //이미지의 y값은  activeImage의 y값을 가져오고
+         //gsap.getProperty()는 ( activeImage의 x값, y값)=> 속성을 반환
+
+
+           activeImage = image;  //img.fadeImg값을가진 변수 image가  activeImage에 저장
+           setX = gsap.quickTo(image, "x", {duration: 0.5, ease:Elastic }),
+           setY = gsap.quickTo(image, "y", {duration: 0.5, ease:Elastic })
+           // setX, setY 변수를 gsap.quickTo() 메소드를 사용하여, image 요소의 x, y 위치를 빠르게 변경
+
+
+          align(e);
+           //마우스 위치의 x, y 좌표를 setX, setY 변수에 할당하는 함수 호출
+        });
+        elem.addEventListener('mouseleave', () => fade.reverse());
+          //reverse() =>애니메이션이 뒤로 향하여 재생 반전
+
+
+      });
+        //.reverse() => 애니메이션모든 측면이 뒤로 향하도록 재생 반전
+    </script>
+  </body>
+</html>

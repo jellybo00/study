@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>y-scroll</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="con01">
+        <div class="textBox">
+          <h1 class="logo">
+            <img src="./img/logo03.png" alt="" />
+          </h1>
+          <p class="title en1">scrollTrigger</p>
+          <p class="txt en">실전! 웹사이드 제작 step by step 시리즈</p>
+        </div>
+      </section>
+      <section class="gallery">
+        <div class="inner">
+          <div class="textBox">
+            <h2>clone <span>Coding</span></h2>
+            <p class="txt">클론코딩 결과물</p>
+            <ul>
+              <li><a href="#">Concierge</a></li>
+              <li><a href="#">Hanwha Solutins</a></li>
+              <li><a href="#">Crew a la mode</a></li>
+              <li><a href="#">Y.Studio</a></li>
+              <li><a href="#">Musign</a></li>
+              <li><a href="#">Laha</a></li>
+              <li><a href="#">Deabang</a></li>
+            </ul>
+            <a href="#" class="btn">Read More</a>
+          </div>
+          <ul class="imgBox">
+            <li class="upBox img1"><img src="./img/img01.png" alt="" /></li>
+            <li class="upBox img2"><img src="./img/img02.png" alt="" /></li>
+            <li class="upBox img3"><img src="./img/img03.png" alt="" /></li>
+            <li class="upBox img4"><img src="./img/img04.png" alt="" /></li>
+            <li class="upBox img5"><img src="./img/img05.png" alt="" /></li>
+            <li class="upBox img6"><img src="./img/img06.png" alt="" /></li>
+            <li class="upBox img7"><img src="./img/img07.png" alt="" /></li>
+          </ul>
+        </div>
+      </section>
+      <section class="con03">
+        <div class="textBox">
+          <h2 class="en1">thank you : )</h2>
+        </div>
+      </section>
+    </div>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      let upBox = document.querySelectorAll(".upBox");
+
+      let timeLine = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".gallery",
+          pin: true,
+          scrub: 3,
+          start: "top top",
+          end: "+=400%", //시작부분에서 400%까지 스크롤 한 후
+          markers: true,
+        },
+      });
+      timeLine.from(upBox, {
+        y: "400%",
+        duration: "8",
+        ease: "none",
+        stagger: "6", //stagger : 각각 애니메이션의 시간차를 둠
+      });
+      timeLine.to(upBox, { y: "0" });
+    </script>
+  </body>
+</html>
