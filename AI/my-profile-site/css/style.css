@@ -1,0 +1,141 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* Tailwind CDN으로 처리하지 않는 커스텀 스타일만 둔다 (외부 CSS에서는 @apply 사용 불가)
+   디자인 컨셉 : 글래스모피즘 - 컬러 그라데이션 배경 위에 반투명 블러 패널을 올린다
+   질감은 "선명한 유리" 방향 : 블러는 약하게, 투명도·채도·테두리 하이라이트는 강하게 */
+
+html{scroll-behavior:smooth}
+body{position:relative;min-height:100vh;font-family:'Pretendard',system-ui,-apple-system,sans-serif;background:linear-gradient(170deg,#ffeef6 0%,#f1efff 45%,#e7f3ff 100%);transition:background .4s,color .3s}
+.dark body{background:linear-gradient(170deg,#140e1c 0%,#0e1018 50%,#0a1118 100%)}
+
+/* 배경 데코 : 고정 블롭 - 유리판이 비칠 색을 깔아준다 (선명하게 보이도록 블러↓ 농도↑) */
+.bg_deco{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg_deco span{position:absolute;border-radius:9999px;filter:blur(70px);opacity:.62}
+.bg_deco .deco_1{top:-140px;right:-60px;width:440px;height:440px;background:#f9a8d4}
+.bg_deco .deco_2{top:34%;left:-150px;width:400px;height:400px;background:#b9a6fd}
+.bg_deco .deco_3{top:62%;right:-110px;width:380px;height:380px;background:#8ec5ff}
+.bg_deco .deco_4{bottom:-170px;left:28%;width:420px;height:420px;background:#8ff0cd}
+.dark .bg_deco span{opacity:.3}
+
+/* 글래스 공통 레시피 : 얇고 투명한 판 + 또렷한 엣지 하이라이트 */
+.glass{background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(9px) saturate(210%) brightness(108%);backdrop-filter:blur(9px) saturate(210%) brightness(108%);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 26px rgba(76,46,99,.1),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(255,255,255,.4)}
+.dark .glass{background:rgba(255,255,255,.065);border-color:rgba(255,255,255,.22);box-shadow:0 8px 26px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.06)}
+
+/* 스크린리더 전용 */
+.blind{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip_nav{position:absolute;left:0;top:-100px;z-index:100;padding:10px 20px;background:#141417;color:#fff;font-size:14px;transition:top .2s}
+.skip_nav:focus{top:0}
+
+/* header : 항상 유리, 스크롤 시 살짝만 짙게 */
+#header{background:rgba(255,255,255,.2);-webkit-backdrop-filter:blur(9px) saturate(210%) brightness(108%);backdrop-filter:blur(9px) saturate(210%) brightness(108%);border-bottom:1px solid rgba(255,255,255,.55);transition:background-color .3s,border-color .3s,box-shadow .3s}
+#header.is_fixed{background:rgba(255,255,255,.4);border-bottom-color:rgba(255,255,255,.9);box-shadow:0 6px 22px rgba(76,46,99,.08)}
+.dark #header{background:rgba(18,16,24,.28);border-bottom-color:rgba(255,255,255,.12)}
+.dark #header.is_fixed{background:rgba(18,16,24,.5);border-bottom-color:rgba(255,255,255,.2);box-shadow:0 6px 22px rgba(0,0,0,.45)}
+
+.nav_link{position:relative;padding:4px 0;color:rgba(46,46,51,.78);transition:color .2s}
+.nav_link:hover{color:#141417}
+.dark .nav_link{color:rgba(236,236,237,.72)}
+.dark .nav_link:hover{color:#fff}
+.nav_link:after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;border-radius:2px;background:linear-gradient(90deg,#ec4899,#a855f7);transition:width .25s}
+.nav_link.is_active{color:#141417;font-weight:700}
+.dark .nav_link.is_active{color:#fff}
+.nav_link.is_active:after{width:100%}
+
+/* 아이콘 버튼 (테마/햄버거) */
+.icon_btn{display:grid;place-items:center;width:40px;height:40px;border-radius:9999px;background:rgba(255,255,255,.28);-webkit-backdrop-filter:blur(8px) saturate(200%);backdrop-filter:blur(8px) saturate(200%);border:1px solid rgba(255,255,255,.9);color:#2e2e33;box-shadow:inset 0 1px 0 rgba(255,255,255,1);transition:background-color .2s,transform .2s,border-color .2s}
+.icon_btn:hover{background:rgba(255,255,255,.55);transform:translateY(-1px)}
+.dark .icon_btn{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:#ececed;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.dark .icon_btn:hover{background:rgba(255,255,255,.15)}
+
+/* 햄버거 */
+.menu_bars{display:block;width:18px}
+.menu_bars i{display:block;height:2px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .2s}
+.menu_bars i+i{margin-top:5px}
+#menuToggle.is_active .menu_bars i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#menuToggle.is_active .menu_bars i:nth-child(2){opacity:0}
+#menuToggle.is_active .menu_bars i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* 모바일 메뉴 */
+.mobile_nav{max-height:0;overflow:hidden;background:rgba(255,255,255,.38);-webkit-backdrop-filter:blur(10px) saturate(210%) brightness(108%);backdrop-filter:blur(10px) saturate(210%) brightness(108%);transition:max-height .35s ease}
+.dark .mobile_nav{background:rgba(18,16,24,.55)}
+.mobile_nav.is_active{max-height:260px;border-top:1px solid rgba(255,255,255,.7)}
+.dark .mobile_nav.is_active{border-top-color:rgba(255,255,255,.14)}
+.mobile_nav a{border-radius:12px;padding-left:14px;transition:background-color .2s}
+.mobile_nav a:hover{background:rgba(255,255,255,.55)}
+.dark .mobile_nav a:hover{background:rgba(255,255,255,.1)}
+
+/* 테마 아이콘 : 라이트일 때 달, 다크일 때 해 */
+.icon_sun{display:none}
+.dark .icon_sun{display:block}
+.dark .icon_moon{display:none}
+
+/* hero */
+.text_gradient{background:linear-gradient(100deg,#ec4899 0%,#a855f7 55%,#6366f1 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero_badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:9999px;font-size:12px;font-weight:700;color:#be185d;background:rgba(255,255,255,.34);-webkit-backdrop-filter:blur(8px) saturate(200%);backdrop-filter:blur(8px) saturate(200%);border:1px solid rgba(255,255,255,.95);box-shadow:0 5px 18px rgba(236,72,153,.16),inset 0 1px 0 rgba(255,255,255,1)}
+.dark .hero_badge{color:#f9a8d4;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+
+/* 섹션 공통 제목 */
+.sec_title{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:800;letter-spacing:-.02em}
+.sec_title:before{content:'';display:block;width:10px;height:10px;border-radius:9999px;background:linear-gradient(135deg,#ec4899,#a855f7);box-shadow:0 0 0 5px rgba(236,72,153,.14)}
+@media (min-width:768px){.sec_title{font-size:34px}}
+
+/* 섹션 글래스 패널 */
+.glass_panel{border-radius:28px;padding:40px 28px}
+@media (min-width:768px){.glass_panel{padding:56px 48px}}
+
+/* 버튼 */
+.btn_primary{display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 28px;border-radius:9999px;background:linear-gradient(120deg,rgba(236,72,153,.88),rgba(139,92,246,.88));-webkit-backdrop-filter:blur(8px) saturate(200%);backdrop-filter:blur(8px) saturate(200%);border:1px solid rgba(255,255,255,.5);color:#fff;font-size:15px;font-weight:600;box-shadow:0 12px 28px rgba(236,72,153,.26),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .2s,box-shadow .2s,filter .2s}
+.btn_primary:hover{transform:translateY(-2px);filter:saturate(135%);box-shadow:0 18px 36px rgba(236,72,153,.34),inset 0 1px 0 rgba(255,255,255,.7)}
+.btn_ghost{display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 28px;border-radius:9999px;background:rgba(255,255,255,.28);-webkit-backdrop-filter:blur(9px) saturate(210%) brightness(108%);backdrop-filter:blur(9px) saturate(210%) brightness(108%);border:1px solid rgba(255,255,255,.95);font-size:15px;font-weight:600;box-shadow:0 6px 20px rgba(76,46,99,.08),inset 0 1px 0 rgba(255,255,255,1);transition:transform .2s,background-color .2s,border-color .2s}
+.btn_ghost:hover{background:rgba(255,255,255,.55);transform:translateY(-2px);border-color:#f9a8d4}
+.dark .btn_ghost{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.dark .btn_ghost:hover{background:rgba(255,255,255,.15);border-color:rgba(249,168,212,.55)}
+
+/* 카드 공통 : 유리판 */
+.stat_card,
+.skill_card,
+.project_card{background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(9px) saturate(210%) brightness(108%);backdrop-filter:blur(9px) saturate(210%) brightness(108%);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 26px rgba(76,46,99,.1),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(255,255,255,.4);transition:transform .25s,box-shadow .25s,border-color .2s,background-color .2s}
+.dark .stat_card,
+.dark .skill_card,
+.dark .project_card{background:rgba(255,255,255,.065);border-color:rgba(255,255,255,.22);box-shadow:0 8px 26px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.06)}
+.stat_card:hover,
+.skill_card:hover,
+.project_card:hover{transform:translateY(-5px);background:rgba(255,255,255,.46);border-color:#fff;box-shadow:0 16px 40px rgba(76,46,99,.15),inset 0 1px 0 rgba(255,255,255,1)}
+.dark .stat_card:hover,
+.dark .skill_card:hover,
+.dark .project_card:hover{background:rgba(255,255,255,.12);border-color:rgba(249,168,212,.4);box-shadow:0 16px 40px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.24)}
+
+/* about 수치 카드 */
+.stat_card{padding:22px;border-radius:20px}
+
+/* skills */
+.skill_card{padding:26px;border-radius:22px}
+.skill_icon{display:grid;place-items:center;width:46px;height:46px;margin-bottom:16px;border-radius:14px;background:linear-gradient(135deg,rgba(236,72,153,.22),rgba(139,92,246,.22));border:1px solid rgba(255,255,255,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,1);color:#db2777}
+.skill_icon svg{width:22px;height:22px}
+.dark .skill_icon{border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.16);color:#f9a8d4}
+.skill_name{font-size:17px;font-weight:700}
+.skill_desc{margin-top:8px;font-size:14px;line-height:1.6;color:rgba(46,46,51,.76)}
+.dark .skill_desc{color:rgba(236,236,237,.66)}
+
+/* projects */
+.project_card{overflow:hidden;border-radius:24px}
+.project_thumb{position:relative;display:grid;place-items:center;height:150px;overflow:hidden}
+.project_thumb:after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.4),rgba(255,255,255,0) 50%)}
+.project_thumb span{position:relative;z-index:1;color:#fff;font-size:20px;font-weight:800;letter-spacing:.2em;text-shadow:0 2px 12px rgba(0,0,0,.22)}
+.tag{display:inline-block;padding:4px 11px;border-radius:9999px;background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.95);font-size:12px;font-weight:600;color:rgba(46,46,51,.8)}
+.dark .tag{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:rgba(236,236,237,.76)}
+
+/* 구분선 : 유리 느낌의 또렷한 하이라이트 */
+.glass_line{border-top:1px solid rgba(255,255,255,.85)}
+.dark .glass_line{border-top-color:rgba(255,255,255,.12)}
+
+/* GSAP 미로드 시에도 콘텐츠가 보이도록 : 기본은 보이는 상태, 애니메이션은 JS에서 설정 */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* backdrop-filter 미지원 브라우저 폴백 */
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  #header,.mobile_nav{background:rgba(255,255,255,.92)}
+  .dark #header,.dark .mobile_nav{background:rgba(18,16,24,.94)}
+  .glass,.stat_card,.skill_card,.project_card,.btn_ghost,.hero_badge,.icon_btn,.tag{background:rgba(255,255,255,.88)}
+  .dark .glass,.dark .stat_card,.dark .skill_card,.dark .project_card,.dark .btn_ghost,.dark .hero_badge,.dark .icon_btn,.dark .tag{background:rgba(31,31,35,.9)}
+}

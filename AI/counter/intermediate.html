@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카운터 앱</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-slate-100">
+
+  <main class="w-full max-w-sm mx-4 p-8 bg-white rounded-2xl shadow-lg text-center">
+    <h1 class="text-xl font-bold text-slate-700">카운터</h1>
+
+    <!-- tabular-nums: 자릿수가 바뀔 때 레이아웃 흔들림 방지 -->
+    <output id="count" class="block my-8 text-7xl font-bold text-blue-600 tabular-nums" aria-live="polite">0</output>
+
+    <!-- 버튼별 리스너 대신 data-action + 이벤트 위임 -->
+    <div id="controls" class="flex gap-3">
+      <button type="button" data-action="decrease" aria-label="1 감소"
+        class="flex-1 py-3 rounded-xl bg-blue-100 text-blue-700 text-lg font-semibold hover:bg-blue-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-95 transition">-1</button>
+      <button type="button" data-action="reset"
+        class="flex-1 py-3 rounded-xl border-2 border-blue-300 text-blue-600 text-lg font-semibold hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-95 transition">리셋</button>
+      <button type="button" data-action="increase" aria-label="1 증가"
+        class="flex-1 py-3 rounded-xl bg-blue-600 text-white text-lg font-semibold hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-95 transition">+1</button>
+    </div>
+  </main>
+
+  <script>
+    const INITIAL = 0;
+    let count = INITIAL;
+
+    // 상태 변경 로직을 객체 하나에 모아 두면 버튼 추가 시 여기만 고치면 된다
+    const actions = {
+      increase: (n) => n + 1,
+      decrease: (n) => n - 1,
+      reset: () => INITIAL,
+    };
+
+    const countEl = document.getElementById('count');
+
+    // 단방향 흐름: 상태 변경 → render. DOM을 직접 읽어 상태로 쓰지 않는다
+    function render() {
+      countEl.textContent = count;
+    }
+
+    document.getElementById('controls').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]'); // 버튼 내부 자식 클릭 대비
+      if (!btn) return;
+      const update = actions[btn.dataset.action];
+      if (!update) return;
+      count = update(count);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

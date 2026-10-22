@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>젤리보 | 웹퍼블리셔 포트폴리오</title>
+<meta name="description" content="4년차 웹 퍼블리셔 젤리보의 프로필 사이트. HTML, CSS, JavaScript, jQuery, GSAP 기반 퍼블리싱과 스크롤 인터랙션 작업을 소개합니다.">
+
+<!-- 다크모드 깜빡임(FOUC) 방지 : Tailwind 로드 전에 html에 dark 클래스 선반영 -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('theme');
+    var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDark) document.documentElement.classList.add('dark');
+  } catch (e) {}
+})();
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        point: {
+          50: '#fdf2f8', 100: '#fce7f3', 200: '#fbcfe8', 300: '#f9a8d4',
+          400: '#f472b6', 500: '#ec4899', 600: '#db2777', 700: '#be185d'
+        },
+        ink: {
+          50: '#f7f7f8', 100: '#ececed', 700: '#2e2e33', 800: '#1f1f23', 900: '#141417'
+        }
+      },
+      fontFamily: {
+        sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="text-ink-800 antialiased dark:text-ink-100">
+
+<a href="#about" class="skip_nav">본문 바로가기</a>
+
+<!-- 글래스 패널이 블러할 컬러 배경 -->
+<div class="bg_deco" aria-hidden="true">
+  <span class="deco_1"></span>
+  <span class="deco_2"></span>
+  <span class="deco_3"></span>
+  <span class="deco_4"></span>
+</div>
+
+<!-- header -->
+<header id="header" class="sticky top-0 z-50 border-b border-transparent transition-all duration-300">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
+    <a href="#hero" class="text-lg font-extrabold tracking-tight">JELLY<span class="text-point-500">BO</span></a>
+
+    <nav class="hidden md:block" aria-label="주요 메뉴">
+      <ul class="flex items-center gap-8 text-sm font-medium">
+        <li><a class="nav_link" href="#about">About</a></li>
+        <li><a class="nav_link" href="#skills">Skills</a></li>
+        <li><a class="nav_link" href="#projects">Projects</a></li>
+        <li><a class="nav_link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-1">
+      <button type="button" id="themeToggle" aria-pressed="false" class="icon_btn">
+        <svg class="icon_sun h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path>
+        </svg>
+        <svg class="icon_moon h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path>
+        </svg>
+        <span class="blind">다크모드 전환</span>
+      </button>
+
+      <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" class="icon_btn md:hidden">
+        <span class="menu_bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="blind">메뉴 열기</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile nav -->
+  <div id="mobileNav" class="mobile_nav md:hidden">
+    <nav aria-label="모바일 메뉴">
+      <ul class="mx-auto max-w-6xl px-5 pb-4 text-sm font-medium">
+        <li><a class="block py-3" href="#about">About</a></li>
+        <li><a class="block py-3" href="#skills">Skills</a></li>
+        <li><a class="block py-3" href="#projects">Projects</a></li>
+        <li><a class="block py-3" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- hero -->
+  <section id="hero" class="relative">
+    <div class="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-36">
+      <p data-anim class="hero_badge mb-6">
+        <span class="h-1.5 w-1.5 rounded-full bg-point-500"></span>Web Publisher · 4th year
+      </p>
+
+      <h1 data-anim class="text-4xl font-extrabold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl">
+        픽셀까지 맞추는<br>
+        <span class="text_gradient">웹퍼블리셔 젤리보</span>
+      </h1>
+
+      <p data-anim class="mt-7 max-w-xl text-base leading-relaxed text-ink-700/80 md:text-lg dark:text-ink-100/70">
+        마크업은 구조부터, 인터랙션은 자연스럽게.<br class="hidden sm:block">
+        지금은 올리브영 이벤트 페이지를 만들고 있습니다.
+      </p>
+
+      <div data-anim class="mt-10 flex flex-wrap items-center gap-3">
+        <a href="#projects" class="btn_primary">프로젝트 보기</a>
+        <a href="https://github.com/jellybo00" target="_blank" rel="noopener" class="btn_ghost">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5A11.5 11.5 0 00.5 12a11.5 11.5 0 007.86 10.92c.58.1.79-.25.79-.55v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.2.66.8.55A11.5 11.5 0 0023.5 12A11.5 11.5 0 0012 .5z"></path>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about" class="glass_line py-20 md:py-24">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <h2 data-anim class="sec_title">About</h2>
+
+      <div class="mt-12 grid gap-12 md:grid-cols-[1.2fr_1fr] md:gap-16">
+        <div data-anim class="space-y-5 text-base leading-relaxed text-ink-700/85 md:text-lg dark:text-ink-100/75">
+          <p>
+            안녕하세요, <strong class="font-semibold text-ink-900 dark:text-white">4년차 웹 퍼블리셔 젤리보</strong>입니다.
+            커리어 전부를 웹 에이전시에서 보내며 다양한 업종의 사이트를 마크업했습니다.
+          </p>
+          <p>
+            현재는 <strong class="font-semibold text-ink-900 dark:text-white">올리브영 이벤트 페이지</strong>를 제작하고 있습니다.
+            짧은 일정 안에서 기획·디자인 의도를 그대로 살리면서도, 다양한 기기와 브라우저에서 깨지지 않는 화면을 만드는 일을 합니다.
+          </p>
+          <p>
+            시멘틱 마크업과 웹 접근성을 기본으로 두고, 스크롤 인터랙션처럼 사용자가 '잘 만들었네'라고 느끼는 디테일을 계속 공부하고 있습니다.
+          </p>
+        </div>
+
+        <ul data-anim-group class="grid grid-cols-2 gap-4 self-start md:grid-cols-1">
+          <li data-anim-item class="stat_card">
+            <strong class="block text-3xl font-extrabold text-point-500">4년+</strong>
+            <span class="mt-1 block text-sm text-ink-700/70 dark:text-ink-100/60">웹 퍼블리싱 경력</span>
+          </li>
+          <li data-anim-item class="stat_card">
+            <strong class="block text-3xl font-extrabold text-point-500">Agency</strong>
+            <span class="mt-1 block text-sm text-ink-700/70 dark:text-ink-100/60">웹 에이전시 전담 경력</span>
+          </li>
+          <li data-anim-item class="stat_card col-span-2 md:col-span-1">
+            <strong class="block text-3xl font-extrabold text-point-500">OLIVE YOUNG</strong>
+            <span class="mt-1 block text-sm text-ink-700/70 dark:text-ink-100/60">이벤트 페이지 제작 중</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- skills -->
+  <section id="skills" class="py-14 md:py-20">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <div class="glass glass_panel">
+      <h2 data-anim class="sec_title">Skills</h2>
+      <p data-anim class="mt-4 text-ink-700/70 dark:text-ink-100/60">실무에서 매일 쓰는 도구들입니다.</p>
+
+      <ul data-anim-group class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <li data-anim-item class="skill_card">
+          <span class="skill_icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 3l1.6 16.2L12 21l6.4-1.8L20 3z"></path><path d="M8 8h8l-.5 4.5H10l.3 3 1.7.5 1.7-.5.2-1.7"></path>
+            </svg>
+          </span>
+          <h3 class="skill_name">HTML5</h3>
+          <p class="skill_desc">의미에 맞는 태그 선택과 접근성을 고려한 시멘틱 마크업</p>
+        </li>
+        <li data-anim-item class="skill_card">
+          <span class="skill_icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 3l1.6 16.2L12 21l6.4-1.8L20 3z"></path><path d="M16.5 7.5H8l.3 3h7.9l-.5 4.5-3.7 1.1-3.7-1.1-.2-1.8"></path>
+            </svg>
+          </span>
+          <h3 class="skill_name">CSS3</h3>
+          <p class="skill_desc">Flex·Grid 반응형 레이아웃, 트랜지션과 애니메이션</p>
+        </li>
+        <li data-anim-item class="skill_card">
+          <span class="skill_icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 10v5a1.8 1.8 0 01-3 0"></path><path d="M17.5 11a2 2 0 00-3.5 1.3c0 2 3.5 1.3 3.5 3.1A2 2 0 0114 16.5"></path>
+            </svg>
+          </span>
+          <h3 class="skill_name">JavaScript</h3>
+          <p class="skill_desc">DOM 제어, 이벤트 처리, 탭·슬라이드 등 동적 UI 구현</p>
+        </li>
+        <li data-anim-item class="skill_card">
+          <span class="skill_icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 4C4.5 7 4.8 11.5 7.6 15.3 10.4 19 14.6 20.6 17.6 19.3"></path><path d="M11 4.5c-1.8 2.4-1.4 6 .8 9 2.1 2.9 5.4 4.2 7.7 3.3"></path>
+            </svg>
+          </span>
+          <h3 class="skill_name">jQuery</h3>
+          <p class="skill_desc">에이전시 작업에 자주 쓰이는 플러그인 연동과 커스터마이징</p>
+        </li>
+        <li data-anim-item class="skill_card">
+          <span class="skill_icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12"></path><path d="M8 11l4 4 4-4"></path><path d="M4 19h16"></path>
+            </svg>
+          </span>
+          <h3 class="skill_name">GSAP · ScrollTrigger</h3>
+          <p class="skill_desc">스크롤 기반 타임라인 애니메이션과 핀 고정 인터랙션</p>
+        </li>
+        <li data-anim-item class="skill_card">
+          <span class="skill_icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="14" height="10" rx="2"></rect><rect x="16" y="10" width="6" height="10" rx="2"></rect>
+            </svg>
+          </span>
+          <h3 class="skill_name">Responsive · A11y</h3>
+          <p class="skill_desc">모바일 대응과 스크린리더를 고려한 마크업 설계</p>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- projects -->
+  <section id="projects" class="py-24 md:py-28">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <h2 data-anim class="sec_title">Projects</h2>
+      <p data-anim class="mt-4 text-ink-700/70 dark:text-ink-100/60">작업했던 유형과 공부 중인 결과물을 모았습니다.</p>
+
+      <ul data-anim-group class="mt-12 grid gap-6 md:grid-cols-3">
+        <li data-anim-item class="project_card">
+          <div class="project_thumb bg-gradient-to-br from-point-400 to-point-600">
+            <span>EVENT</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold">올리브영 이벤트 페이지</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700/75 dark:text-ink-100/65">
+              주차별로 오픈되는 프로모션 페이지를 제작합니다. 디자인 시안을 모바일 우선으로 마크업하고, 쿠폰·탭·아코디언 같은 반복 UI를 재사용 가능한 형태로 정리했습니다.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">jQuery</span><span class="tag">Mobile</span>
+            </div>
+          </div>
+        </li>
+
+        <li data-anim-item class="project_card">
+          <div class="project_thumb bg-gradient-to-br from-violet-400 to-indigo-600">
+            <span>AGENCY</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold">반응형 기업 사이트 퍼블리싱</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700/75 dark:text-ink-100/65">
+              웹 에이전시에서 다양한 업종의 사이트를 퍼블리싱했습니다. 가이드에 맞춘 공통 컴포넌트 작업, 크로스 브라우징, 접근성 검수 대응까지 담당했습니다.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="tag">Responsive</span><span class="tag">Cross Browsing</span><span class="tag">A11y</span>
+            </div>
+          </div>
+        </li>
+
+        <li data-anim-item class="project_card">
+          <div class="project_thumb bg-gradient-to-br from-emerald-400 to-teal-600">
+            <span>STUDY</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold">GSAP 스크롤 인터랙션 스터디</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700/75 dark:text-ink-100/65">
+              ScrollTrigger로 가로 스크롤 갤러리, 핀 고정 섹션, 마우스 추적 효과 등을 직접 구현하며 정리한 학습 저장소입니다.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="tag">GSAP</span><span class="tag">ScrollTrigger</span><span class="tag">JavaScript</span>
+            </div>
+            <a href="https://jellybo00.github.io/study/@index.html" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-point-600 hover:underline dark:text-point-300">
+              스터디 저장소 보기
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" class="py-14 md:py-20">
+    <div class="mx-auto max-w-3xl px-5 md:px-8">
+      <div class="glass glass_panel text-center">
+      <h2 data-anim class="sec_title justify-center">Contact</h2>
+      <p data-anim class="mt-6 text-lg text-ink-700/80 dark:text-ink-100/70">
+        작업물과 공부 기록은 GitHub에 쌓아두고 있습니다.<br>
+        함께할 일이 있다면 편하게 연락 주세요.
+      </p>
+      <div class="mt-10 flex justify-center">
+        <a href="https://github.com/jellybo00" target="_blank" rel="noopener" class="btn_primary">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5A11.5 11.5 0 00.5 12a11.5 11.5 0 007.86 10.92c.58.1.79-.25.79-.55v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.2.66.8.55A11.5 11.5 0 0023.5 12A11.5 11.5 0 0012 .5z"></path>
+          </svg>
+          github.com/jellybo00
+        </a>
+      </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="glass_line py-10 text-center text-sm text-ink-700/60 dark:text-ink-100/50">
+  &copy; 2026 젤리보 (JELLYBO). Web Publisher.
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
